@@ -1,0 +1,93 @@
+.context-panel {
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.context-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-bottom: 1px solid #252525;
+}
+
+.context-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #777;
+}
+
+.context-close {
+  background: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: color 0.1s;
+}
+
+.context-close:hover {
+  color: #aaa;
+}
+
+.context-body {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ctx-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ctx-row-inline {
+  flex-direction: row;
+  gap: 8px;
+}
+
+.ctx-row-inline > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ctx-row label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+}
+
+.ctx-row input,
+.ctx-row textarea {
+  background: #121212;
+  border: 1px solid #2d2d2d;
+  border-radius: 4px;
+  color: #ccc;
+  font-size: 12px;
+  padding: 4px 8px;
+  outline: none;
+  font-family: inherit;
+  resize: none;
+  transition: border-color 0.15s;
+}
+
+.ctx-row input:focus,
+.ctx-row textarea:focus {
+  border-color: #C96442;
+}
+
+.ctx-row input::placeholder,
+.ctx-row textarea::placeholder {
+  color: #444;
+}

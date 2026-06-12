@@ -1,0 +1,47 @@
+appId: com.terminaut.app
+productName: Terminaut
+copyright: "Terminaut"
+
+directories:
+  buildResources: build
+  output: dist
+
+files:
+  - out/**/*
+  - "!out/**/*.map"
+
+# ── Linux ──────────────────────────────────────────────────────────────────
+linux:
+  target:
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
+  icon: build/icon.png
+  category: Development
+  description: "AI Terminal Hub — múltiplas sessões de IA em um workspace"
+
+# ── Windows ────────────────────────────────────────────────────────────────
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: build/icon.png
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
+# ── macOS ──────────────────────────────────────────────────────────────────
+mac:
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+  icon: build/icon.png
+  category: public.app-category.developer-tools
+
+# ── Native modules ────────────────────────────────────────────────────────
+# node-pty needs to be rebuilt for each Electron version/platform
+beforeBuild: npm run rebuild

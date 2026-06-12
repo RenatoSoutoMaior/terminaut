@@ -1,0 +1,176 @@
+.terminal-panel {
+  display: flex;
+  flex-direction: column;
+  background: #111111;
+  border: 1px solid #222;
+  border-radius: 7px;
+  overflow: hidden;
+  min-height: 0;
+  min-width: 0;
+  transition: border-color 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+
+.terminal-panel.status-running { border-color: #1f2e1f; }
+.terminal-panel.status-error   { border-color: #3d1f1f; }
+.terminal-panel.is-minimized   { flex: 0 0 auto; }
+
+/* ── Active / focused panel ───────────────────────────────────────────────── */
+/* :focus-within fires when the xterm textarea (or any child) has keyboard focus */
+
+.terminal-panel:focus-within {
+  border-color: #C96442;
+  box-shadow:
+    0 0 0 1px rgba(201, 100, 66, 0.22),
+    0 0 24px rgba(201, 100, 66, 0.09);
+}
+
+/* Ensure focus wins over status border colours */
+.terminal-panel.status-running:focus-within,
+.terminal-panel.status-error:focus-within,
+.terminal-panel.status-stopped:focus-within {
+  border-color: #C96442;
+}
+
+.terminal-panel:focus-within .panel-header {
+  background: #1c1812;
+  border-bottom-color: rgba(201, 100, 66, 0.14);
+}
+
+.terminal-panel:focus-within .panel-name {
+  color: #ebebeb;
+}
+
+.terminal-panel:focus-within .panel-tool-icon {
+  filter: brightness(1.25);
+}
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #252525;
+  min-height: 30px;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.panel-tool-icon {
+  font-size: 12px;
+  font-weight: 700;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.panel-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ccc;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: text;
+  padding: 1px 0;
+}
+
+.panel-name:hover { color: #fff; }
+
+.panel-name-input {
+  flex: 1;
+  background: #252525;
+  border: 1px solid #C96442;
+  border-radius: 3px;
+  color: #f0f0f0;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1px 6px;
+  outline: none;
+  font-family: inherit;
+}
+
+.panel-status {
+  font-size: 8px;
+  flex-shrink: 0;
+}
+.panel-status.starting { color: #f59e0b; }
+.panel-status.running  { color: #22c55e; font-size: 7px; }
+.panel-status.stopped  { color: #52525b; }
+.panel-status.error    { color: #ef4444; }
+
+.panel-actions {
+  display: flex;
+  gap: 1px;
+  margin-left: auto;
+}
+
+.act-btn {
+  background: transparent;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  line-height: 1;
+  transition: background 0.1s, color 0.1s;
+}
+
+.act-btn:hover         { background: #252525; color: #bbb; }
+.act-btn.active        { color: #C96442; }
+.act-btn.has-data      { color: #C96442; opacity: 0.7; }
+.act-btn.has-data:hover { opacity: 1; }
+.close-btn:hover       { background: #3d1f1f; color: #f87171; }
+
+/* ── Terminal wrapper ────────────────────────────────────────────────────── */
+
+.panel-terminal-wrap {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  padding: 2px;
+  background: #111111;
+  /* When minimized we collapse height to 0 but keep it in the DOM */
+}
+
+.is-minimized .panel-terminal-wrap {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ── xterm overrides ─────────────────────────────────────────────────────── */
+
+.panel-terminal-wrap .xterm {
+  height: 100%;
+  padding: 2px;
+}
+
+.panel-terminal-wrap .xterm-viewport {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a transparent;
+}
+
+.panel-terminal-wrap .xterm-viewport::-webkit-scrollbar {
+  width: 5px;
+}
+
+.panel-terminal-wrap .xterm-viewport::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+.panel-terminal-wrap .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}
+
+.panel-terminal-wrap .xterm-screen {
+  margin: 0;
+}
